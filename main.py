@@ -12,5 +12,13 @@ def main():
 
     print(book.author)
 
+    book.pop_author('Ivan')
+
+    print(book.author)
+
+    book.pop_author('Lolita')
+
+    print(book.author)
+
 if __name__ == '__main__':
     main()
