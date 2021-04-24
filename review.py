@@ -9,6 +9,10 @@ class Review:
         self.__description = description
         self.__date_of_create = datetime.datetime.now()
 
+    # Override magic methods
+    def __repr__(self):
+        return f'<Author {self.__author}, description {self.__description}>'
+
     # Getter`s argument`s data object of class
     @property
     def author(self):

@@ -61,6 +61,10 @@ class Book:
     def rating(self):
         return float(f'{self.__rating:.3}')
 
+    @property
+    def count_review(self):
+        return len(self.__review_list)
+
     # Setter`s argument`s data object of class
     @title.setter
     def title(self, title):

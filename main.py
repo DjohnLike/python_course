@@ -22,6 +22,8 @@ def main():
     author_1.append_book(book_2)
 
     print(author_1.rating)
+    print(book_1.review_list)
+    print(book_1.count_review)
 
 
 if __name__ == '__main__':
