@@ -4,7 +4,7 @@ import datetime
 class Review:
     def __init__(self, author, rating, description):
         self.__author = author
-        self.__rating = Review.rating_validate(rating)
+        self.__rating = Review.__rating_validate(rating)
         self.__description = description
         self.__date_of_create = datetime.datetime.now()
 
@@ -32,7 +32,7 @@ class Review:
 
     @rating.setter
     def rating(self, rating):
-        self.__rating = Review.rating_validate(rating)
+        self.__rating = Review.__rating_validate(rating)
 
     @description.setter
     def description(self, description):
@@ -40,7 +40,7 @@ class Review:
 
     # StaticMethods of class
     @staticmethod
-    def rating_validate(value):
+    def __rating_validate(value):
         """Checking the input value for type int or float
            round value to 0 if value less 0, or round value to 10 if
            value more 10. If value not int or float raise ValueError"""
@@ -49,6 +49,6 @@ class Review:
                 return 0
             elif value > 10:
                 return 10
+            return value
         else:
             raise ValueError('The value must be int or float')
-

@@ -22,6 +22,7 @@ class Book:
         self.__year = year
         self.__genre.append(genre)
         self.__edition = edition
+        self.__rating_of_the_book = 0
 
     # Override magic methods
     def __eq__(self, other):
@@ -63,6 +64,10 @@ class Book:
     def edition(self):
         return self.__edition
 
+    @property
+    def rating_of_the_book(self):
+        return float(f'{self.__rating_of_the_book:.3}')
+
     # Setter`s argument`s data object of class
     @title.setter
     def title(self, title):
@@ -81,6 +86,13 @@ class Book:
         self.__edition = edition
 
     # Classic method`s of object class
+
+    def __average_rating(self):
+        self.__rating_of_the_book = 0
+        for review in self.__review_list:
+            self.__rating_of_the_book += review.rating
+        self.__rating_of_the_book /= len(self.__review_list)
+
     def append_author(self, author):
         """Append Author object to author list book"""
         self.__author.append(author)
@@ -94,12 +106,14 @@ class Book:
     def append_review(self, review):
         """Append Review object to review list book"""
         self.__review_list.append(review)
+        self.__average_rating()
 
     def pop_review(self, review):
         """Pop Review object of review list book
            If review not instance in list review, return None"""
         if review in self.__review_list:
-            return self.__review_list.pop(self.__review_list.index(review))
+            self.__review_list.pop(self.__review_list.index(review))
+            self.__average_rating()
 
     def append_genre(self, genre):
         """Append genre to genre list book"""
