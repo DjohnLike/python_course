@@ -2,6 +2,7 @@ import datetime
 
 
 class Review:
+    # Initialisation object of class
     def __init__(self, author, rating, description):
         self.__author = author
         self.__rating = Review.__rating_validate(rating)

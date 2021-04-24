@@ -1,11 +1,4 @@
 class Book:
-    # Set defaults class arguments
-    __default_title = 'Book Title'
-    __default_author = []
-    __default_description = 'Book Description'
-    __default_year = 'Book create year'
-    __default_genre = []
-    __default_review_list = []
 
     # Initialisation object of class
     def __init__(self, title, author,
@@ -22,7 +15,7 @@ class Book:
         self.__year = year
         self.__genre.append(genre)
         self.__edition = edition
-        self.__rating_of_the_book = 0
+        self.__rating = 0
 
     # Override magic methods
     def __eq__(self, other):
@@ -33,7 +26,7 @@ class Book:
             return False
 
     def __str__(self):
-        return f'{self.__title}, {self.__author}, {self.__year}, {self.edition}'
+        return f'{self.__title}, {self.__author}, {self.__year}, {self.edition}, {self.__rating}'
 
     # Getter`s argument`s data object of class
     @property
@@ -65,8 +58,8 @@ class Book:
         return self.__edition
 
     @property
-    def rating_of_the_book(self):
-        return float(f'{self.__rating_of_the_book:.3}')
+    def rating(self):
+        return float(f'{self.__rating:.3}')
 
     # Setter`s argument`s data object of class
     @title.setter
@@ -88,10 +81,12 @@ class Book:
     # Classic method`s of object class
 
     def __average_rating(self):
-        self.__rating_of_the_book = 0
+        """Calculates the average of the book's rating based
+        on the rating values in the reviews in the list of reviews"""
+        self.__rating = 0
         for review in self.__review_list:
-            self.__rating_of_the_book += review.rating
-        self.__rating_of_the_book /= len(self.__review_list)
+            self.__rating += review.rating
+        self.__rating /= len(self.__review_list)
 
     def append_author(self, author):
         """Append Author object to author list book"""

@@ -4,21 +4,25 @@ from review import Review
 
 
 def main():
-    book = Book('My book', 'Ivan', 'This`s book about of our life', '1992', 'autobiography', 1)
-    review = Review('Ivan', 10, 'Very interesting')
-    review_1 = Review('Janis', 10, 'Interesting')
-    review_2 = Review('Elise', 6, 'Hmm...')
+    author_1 = Author('Ivan', '29')
+    book_1 = Book('My Book', author_1, 'The book about computers', '2017', 'Computer since', 1)
+    book_2 = Book('My Book N2', author_1, 'The book about computers', '2021', 'Computer since', 2)
 
-    book.append_review(review)
-    book.append_review(review_1)
-    book.append_review(review_2)
-    print(book.review_list)
-    print(book.rating_of_the_book)
+    review_1 = Review('User 1', 8, 'This book about computers')
+    review_2 = Review('User 2', 3, 'This book not interesting')
+    review_3 = Review('User 3', 5, 'Description review - 1')
+    review_4 = Review('User 4', 7, 'Description review - 2')
 
-    book.pop_review(review_2)
-    print(book.review_list)
+    book_1.append_review(review_1)
+    book_1.append_review(review_2)
+    book_2.append_review(review_3)
+    book_2.append_review(review_4)
 
-    print(book.rating_of_the_book)
+    author_1.append_book(book_1)
+    author_1.append_book(book_2)
+
+    print(author_1.rating)
+
 
 if __name__ == '__main__':
     main()
