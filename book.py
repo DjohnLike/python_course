@@ -34,7 +34,6 @@ class Book:
     def __str__(self):
         return f'{self.__title}, {self.__author}, {self.__year}, {self.edition}'
 
-
     # Getter`s argument`s data object of class
     @property
     def title(self):
