@@ -8,19 +8,32 @@ class Book:
     __default_review_list = []
 
     # Initialisation object of class
-    def __init__(self, title=__default_title, author=__default_author,
-                 description=__default_description, year=__default_year,
-                 genre=__default_genre):
-        # initialisation list`s
+    def __init__(self, title, author,
+                 description, year,
+                 genre, edition):
+        # Initialisation list`s
         self.__author = []
         self.__genre = []
         self.__review_list = []
-
+        # Initialisation arguments data objet
         self.__title = title
         self.__author.append(author)
         self.__description = description
         self.__year = year
         self.__genre.append(genre)
+        self.__edition = edition
+
+    # Override magic methods
+    def __eq__(self, other):
+        if self.__author == other.__author and self.__title == other.__title and \
+                self.__year == other.__year and self.__edition == other.__edition:
+            return True
+        else:
+            return False
+
+    def __str__(self):
+        return f'{self.__title}, {self.__author}, {self.__year}, {self.edition}'
+
 
     # Getter`s argument`s data object of class
     @property
@@ -47,6 +60,10 @@ class Book:
     def review_list(self):
         return self.__review_list
 
+    @property
+    def edition(self):
+        return self.__edition
+
     # Setter`s argument`s data object of class
     @title.setter
     def title(self, title):
@@ -59,6 +76,10 @@ class Book:
     @year.setter
     def year(self, year):
         self.__year = year
+
+    @edition.setter
+    def edition(self, edition):
+        self.__edition = edition
 
     # Classic method`s of object class
     def append_author(self, author):
@@ -90,4 +111,3 @@ class Book:
            If genre not instance in list review, return None"""
         if genre in self.__genre:
             return self.__genre.pop(self.__genre.index(genre))
-
