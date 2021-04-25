@@ -3,20 +3,20 @@ import datetime
 
 class Review:
     # Initialisation object of class
-    def __init__(self, author, rating, description):
-        self.__author = author
+    def __init__(self, user, rating, description):
+        self.__user = user
         self.__rating = Review.__rating_validate(rating)
         self.__description = description
         self.__date_of_create = datetime.datetime.now()
 
     # Override magic methods
     def __repr__(self):
-        return f'<Author {self.__author}, description {self.__description}>'
+        return f'<{self.__user}: {self.__description}>'
 
     # Getter`s argument`s data object of class
     @property
-    def author(self):
-        return self.__author
+    def user(self):
+        return self.__user
 
     @property
     def rating(self):
@@ -31,9 +31,9 @@ class Review:
         return self.__date_of_create
 
     # Setter`s argument`s data object of class
-    @author.setter
-    def author(self, author):
-        self.__author = author
+    @user.setter
+    def user(self, author):
+        self.__user = author
 
     @rating.setter
     def rating(self, rating):
