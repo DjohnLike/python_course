@@ -2,6 +2,9 @@ import datetime
 
 
 class Review:
+
+    __default_max_value = 10
+
     # Initialisation object of class
     def __init__(self, user, rating, description):
         self.__user = user
@@ -43,17 +46,22 @@ class Review:
     def description(self, description):
         self.__description = description
 
+    # ClassMethods of class
+    @classmethod
+    def set_max_value(cls, value):
+        cls.__default_max_value = value
+
     # StaticMethods of class
     @staticmethod
     def __rating_validate(value):
         """Checking the input value for type int or float
-           round value to 0 if value less 0, or round value to 10 if
-           value more 10. If value not int or float raise ValueError"""
+           round value to 0 if value less 0, or round value to __default_max_value if
+           value more __default_max_value. If value not int or float raise ValueError"""
         if isinstance(value, int) or isinstance(value, float):
             if value < 0:
                 return 0
-            elif value > 10:
-                return 10
+            elif value > Review.__default_max_value:
+                return Review.__default_max_value
             return value
         else:
             raise ValueError('The value must be int or float')

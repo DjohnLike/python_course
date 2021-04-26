@@ -1,30 +1,36 @@
+import os
+import logging
+from aiogram import Bot, Dispatcher, executor, types
+
 from book import Book
 from author import Author
 from review import Review
+from user import User
+
+API_TOKEN = os.getenv('API_TELEGRAM_BOT')
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+
+# Initialize bot and dispatcher
+bot = Bot(token=API_TOKEN)
+db = Dispatcher(bot)
 
 
 def main():
-    author_1 = Author('Ivan', '29')
-    book_1 = Book('My Book', author_1, 'The book about computers', '2017', 'Computer since', 1)
-    book_2 = Book('My Book N2', author_1, 'The book about computers', '2021', 'Computer since', 2)
 
-    review_1 = Review('User 1', 8, 'This book about computers')
-    review_2 = Review('User 2', 3, 'This book not interesting')
-    review_3 = Review('User 3', 5, 'Description review - 1')
-    review_4 = Review('User 4', 7, 'Description review - 2')
+    @db.message_handler(commands=['start', 'help'])
+    async def send_welcome(message: types.Message):
+        """
+        This handler will be called when user sends `/start` or `/help`
+        command
+        """
+        await message.reply('Hi!\nI\'m EchoBot!\nPowered by aiogram.')
 
-    book_1.append_review(review_1)
-    book_1.append_review(review_2)
-    book_2.append_review(review_3)
-    book_2.append_review(review_4)
-
-    author_1.append_book(book_1)
-    author_1.append_book(book_2)
-
-    print(author_1.rating)
-    print(book_1.review_list)
-    print(book_1.count_review)
+    @db.message_handler()
+    async def echo(message: types.Message):
+        await message.answer(message.text)
 
 
 if __name__ == '__main__':
     main()
+    executor.start_polling(db, skip_updates=True)
